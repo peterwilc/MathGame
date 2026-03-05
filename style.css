@@ -1,0 +1,143 @@
+:root {
+  color-scheme: light;
+  --bg: #f8f9ff;
+  --card: #ffffff;
+  --text: #20233a;
+  --primary: #5b6dfc;
+  --accent: #fbbf24;
+  --good: #17b26a;
+  --bad: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Comic Sans MS", "Trebuchet MS", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #e8f0ff, var(--bg));
+  color: var(--text);
+}
+
+.app {
+  max-width: 760px;
+  margin: 2rem auto;
+  padding: 0 1rem 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(59, 72, 121, 0.15);
+  margin-bottom: 1rem;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  align-items: end;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  border-radius: 12px;
+  border: 2px solid #d6d9f5;
+  padding: 0.55rem 0.7rem;
+}
+
+button {
+  cursor: pointer;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-weight: 800;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-weight: 700;
+}
+
+#problemText {
+  font-size: 2rem;
+  margin: 1.1rem 0;
+}
+
+#answerForm {
+  display: flex;
+  gap: 0.75rem;
+}
+
+#answerInput {
+  flex: 1;
+}
+
+#feedback {
+  min-height: 2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.good {
+  color: var(--good);
+}
+
+.bad {
+  color: var(--bad);
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+#rewardDialog {
+  border: none;
+  border-radius: 18px;
+  padding: 0;
+  max-width: 450px;
+}
+
+#rewardDialog::backdrop {
+  background: rgba(10, 10, 24, 0.4);
+}
+
+#rewardDialog article {
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.reward-visual {
+  font-size: 3rem;
+  min-height: 80px;
+  display: grid;
+  place-items: center;
+  margin: 0.5rem 0 1rem;
+}

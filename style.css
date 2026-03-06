@@ -83,7 +83,15 @@ button:disabled {
 
 #problemText {
   font-size: 2rem;
-  margin: 1.1rem 0;
+  margin: 1.1rem 0 0.6rem;
+}
+
+.format-hint {
+  margin-top: 0;
+  background: #eef1ff;
+  border-left: 4px solid var(--primary);
+  padding: 0.6rem;
+  border-radius: 8px;
 }
 
 #answerForm {

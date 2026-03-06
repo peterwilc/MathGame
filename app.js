@@ -1,4 +1,4 @@
-const modeSelect = document.getElementById("modeSelect");
+const difficultySelect = document.getElementById("difficultySelect");
 const questionCountInput = document.getElementById("questionCount");
 const startBtn = document.getElementById("startBtn");
 const problemText = document.getElementById("problemText");
@@ -25,8 +25,8 @@ let state = {
 
 const rewards = [
   { title: "🎉 Tiny Victory Dance", visual: "🕺💃", message: "You unlocked Dance Mode. Wiggle break for 20 seconds!" },
-  { title: "🧠 Brain Buff +10", visual: "🧠✨", message: "Your math brain just leveled up. Legendary focus unlocked!" },
-  { title: "🐱 Meme Drop", visual: "😼📚", message: "When you solve math faster than the calculator's feelings can process." },
+  { title: "🧠 Brain Buff +10", visual: "🧠✨", message: "Your long-division brain just leveled up." },
+  { title: "🐱 Meme Drop", visual: "😼📚", message: "Remainders fear you now." },
   { title: "🏆 Gold Star Storm", visual: "⭐🌟⭐", message: "Teacher energy: 100%. Keep going, champion!" },
 ];
 
@@ -60,7 +60,7 @@ function nextProblem() {
     return;
   }
 
-  state.currentProblem = buildProblem(modeSelect.value);
+  state.currentProblem = buildLongDivisionProblem(difficultySelect.value);
   problemText.textContent = state.currentProblem.text;
   answerInput.value = "";
   answerInput.focus();
@@ -80,8 +80,8 @@ function submitAnswer(event) {
     return;
   }
 
-  const expected = String(state.currentProblem.answer);
-  const normalized = raw.replace(/\s+/g, "");
+  const normalized = normalizeAnswer(raw);
+  const expected = normalizeAnswer(state.currentProblem.answer);
 
   if (normalized === expected) {
     state.score += 1;
@@ -119,57 +119,36 @@ function updateHud() {
   streakText.textContent = `Streak: ${state.streak} 🔥`;
 }
 
-function buildProblem(mode) {
-  switch (mode) {
-    case "add": {
-      const a = rand(2, 50);
-      const b = rand(2, 50);
-      return { text: `${a} + ${b} = ?`, answer: a + b, hint: `Add ${a} and ${b}` };
-    }
-    case "subtract": {
-      const a = rand(10, 90);
-      const b = rand(2, a - 1);
-      return { text: `${a} - ${b} = ?`, answer: a - b, hint: `Count backward from ${a}` };
-    }
-    case "multiply": {
-      const a = rand(2, 12);
-      const b = rand(2, 12);
-      return { text: `${a} × ${b} = ?`, answer: a * b, hint: `${a} groups of ${b}` };
-    }
-    case "divide": {
-      const divisor = rand(2, 12);
-      const answer = rand(2, 12);
-      const dividend = divisor * answer;
-      return { text: `${dividend} ÷ ${divisor} = ?`, answer, hint: `What times ${divisor} gives ${dividend}?` };
-    }
-    case "fractionAdd": {
-      const denominator = rand(2, 10);
-      const n1 = rand(1, denominator - 1);
-      const n2 = rand(1, denominator - 1);
-      const sum = n1 + n2;
-      const g = gcd(sum, denominator);
-      const simpNum = sum / g;
-      const simpDen = denominator / g;
-      return {
-        text: `${n1}/${denominator} + ${n2}/${denominator} = ? (format: a/b)`,
-        answer: `${simpNum}/${simpDen}`,
-        hint: `Add the top numbers: ${n1} + ${n2}`,
-      };
-    }
-    default:
-      return { text: "2 + 2 = ?", answer: 4, hint: "It's 4" };
-  }
+function buildLongDivisionProblem(difficulty) {
+  const divisor = rand(2, 9);
+  const ranges = {
+    easy: { minQuotient: 4, maxQuotient: 18, maxRemainder: divisor - 1 },
+    medium: { minQuotient: 10, maxQuotient: 55, maxRemainder: divisor - 1 },
+    hard: { minQuotient: 20, maxQuotient: 120, maxRemainder: divisor - 1 },
+  };
+
+  const chosenRange = ranges[difficulty] || ranges.medium;
+  const quotient = rand(chosenRange.minQuotient, chosenRange.maxQuotient);
+  const remainder = rand(0, chosenRange.maxRemainder);
+  const dividend = divisor * quotient + remainder;
+
+  const answer = `${quotient} r ${remainder}`;
+
+  return {
+    text: `${dividend} ÷ ${divisor} = ?`,
+    answer,
+    hint: `${divisor} × ${quotient} = ${divisor * quotient}, so leftover is ${remainder}`,
+  };
+}
+
+function normalizeAnswer(text) {
+  return text
+    .toLowerCase()
+    .replace(/remainder/g, "r")
+    .replace(/\s+/g, "")
+    .replace(/,/g, "");
 }
 
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function gcd(a, b) {
-  while (b !== 0) {
-    const temp = b;
-    b = a % b;
-    a = temp;
-  }
-  return a;
 }

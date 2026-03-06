@@ -3,25 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Math Quest - Vibe Coder Edition</title>
+    <title>Long Division Lab</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="app">
       <header>
-        <h1>🎯 Math Quest</h1>
-        <p>Practice, level up, and unlock rewards.</p>
+        <h1>➗ Long Division Lab</h1>
+        <p>Practice quotient + remainder until the process feels automatic.</p>
       </header>
 
       <section class="controls card">
         <label>
-          Skill
-          <select id="modeSelect">
-            <option value="add">Addition</option>
-            <option value="subtract">Subtraction</option>
-            <option value="multiply">Multiplication</option>
-            <option value="divide">Division</option>
-            <option value="fractionAdd">Add Fractions (same denominator)</option>
+          Difficulty
+          <select id="difficultySelect">
+            <option value="easy">Easy (2-digit dividend)</option>
+            <option value="medium" selected>Medium (2-3 digit dividend)</option>
+            <option value="hard">Hard (3-digit dividend)</option>
           </select>
         </label>
 
@@ -39,11 +37,12 @@
           <p id="score">Score: 0</p>
           <p id="streak">Streak: 0 🔥</p>
         </div>
-        <h2 id="problemText">Pick a skill and press <em>Start Round</em>.</h2>
+        <h2 id="problemText">Choose difficulty and press <em>Start Round</em>.</h2>
+        <p class="format-hint">Answer format: <strong>quotient r remainder</strong> (example: <code>13 r 2</code>).</p>
 
         <form id="answerForm">
           <label for="answerInput" class="visually-hidden">Answer</label>
-          <input id="answerInput" type="text" autocomplete="off" inputmode="numeric" placeholder="Type your answer" disabled />
+          <input id="answerInput" type="text" autocomplete="off" placeholder="Type your answer (example: 8 r 1)" disabled />
           <button id="submitBtn" type="submit" disabled>Submit</button>
         </form>
 
@@ -51,12 +50,12 @@
       </section>
 
       <section class="roadmap card">
-        <h3>🧠 Future "Skill Breakdown" Mode</h3>
+        <h3>🧠 Long Division Skill Track</h3>
         <ol>
-          <li>Show only the first long-division top number.</li>
-          <li>Then practice multiply-and-place step.</li>
-          <li>Then subtract step.</li>
-          <li>Then repeat until full solve is mastered.</li>
+          <li>Divide: choose the top number for the next quotient digit.</li>
+          <li>Multiply: place divisor × quotient digit underneath.</li>
+          <li>Subtract and bring down.</li>
+          <li>Repeat until quotient and remainder are complete.</li>
         </ol>
       </section>
     </main>

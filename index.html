@@ -3,31 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Math Quest - Vibe Coder Edition</title>
+    <title>Times Table Trainer</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="app">
       <header>
-        <h1>🎯 Math Quest</h1>
-        <p>Practice, level up, and unlock rewards.</p>
+        <h1>⚡ Times Table Trainer</h1>
+        <p>Memorize 3s, 4s, 5s, 6s, 7s, 8s, 9s, and 12s with adaptive practice.</p>
       </header>
 
       <section class="controls card">
         <label>
-          Skill
-          <select id="modeSelect">
-            <option value="add">Addition</option>
-            <option value="subtract">Subtraction</option>
-            <option value="multiply">Multiplication</option>
-            <option value="divide">Division</option>
-            <option value="fractionAdd">Add Fractions (same denominator)</option>
-          </select>
-        </label>
-
-        <label>
           Questions
-          <input id="questionCount" type="number" min="5" max="30" step="5" value="10" />
+          <input id="questionCount" type="number" min="8" max="40" step="4" value="16" />
         </label>
 
         <button id="startBtn" type="button">Start Round</button>
@@ -38,12 +27,14 @@
           <p id="progress">Progress: 0/0</p>
           <p id="score">Score: 0</p>
           <p id="streak">Streak: 0 🔥</p>
+          <p id="timer">⏱️ Time left: 8.0s</p>
         </div>
-        <h2 id="problemText">Pick a skill and press <em>Start Round</em>.</h2>
+
+        <h2 id="problemText">Press <em>Start Round</em> to begin.</h2>
 
         <form id="answerForm">
           <label for="answerInput" class="visually-hidden">Answer</label>
-          <input id="answerInput" type="text" autocomplete="off" inputmode="numeric" placeholder="Type your answer" disabled />
+          <input id="answerInput" type="number" autocomplete="off" inputmode="numeric" placeholder="Type your answer" disabled />
           <button id="submitBtn" type="submit" disabled>Submit</button>
         </form>
 
@@ -51,13 +42,12 @@
       </section>
 
       <section class="roadmap card">
-        <h3>🧠 Future "Skill Breakdown" Mode</h3>
-        <ol>
-          <li>Show only the first long-division top number.</li>
-          <li>Then practice multiply-and-place step.</li>
-          <li>Then subtract step.</li>
-          <li>Then repeat until full solve is mastered.</li>
-        </ol>
+        <h3>🤖 Adaptive Learning</h3>
+        <ul>
+          <li>Facts answered incorrectly appear more often.</li>
+          <li>Mastered facts appear less often, but never vanish completely.</li>
+          <li>Each answer has an 8-second speed challenge.</li>
+        </ul>
       </section>
     </main>
 

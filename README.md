@@ -1,28 +1,28 @@
-# Math Quest (Vibe Coder Starter)
+# Times Table Trainer
 
-A lightweight browser game for 3rd-grade math practice.
+A lightweight browser game focused on times-table memorization.
 
 ## What it does
-- Generates quick quiz rounds (5-30 questions)
-- Supports:
-  - Addition
-  - Subtraction
-  - Multiplication
-  - Division
-  - Fraction addition with same denominators
-- Tracks score + streak
-- Gives a random reward modal at the end for motivation
+- Focuses only on these tables: **3s, 4s, 5s, 6s, 7s, 8s, 9s, 12s**
+- Uses direct **number input** (no multiple choice)
+- Gives an **8-second timer** for every question
+- Tracks score and streak
+- Uses adaptive weighting to show missed facts more often and mastered facts less often
+- Shows an end-of-round reward (mini-game prompt / meme / mastery badge)
+
+## Adaptive learning model
+Each multiplication fact has its own learning profile:
+- Correct answers increase proficiency and slightly lower frequency
+- Incorrect or timed-out answers lower proficiency and increase frequency
+- New or weak facts receive higher selection weights
+
+This creates a basic AI-style personalized drill loop.
 
 ## Run locally
-Because it's plain HTML/CSS/JS, you can open `index.html` directly or run a tiny local server:
+Because it's plain HTML/CSS/JS, you can open `index.html` directly or run a local server:
 
 ```bash
 python -m http.server 8000
 ```
 
 Then open <http://localhost:8000>.
-
-## Next step ideas
-- Break topics into step-by-step mastery tracks (like long division step 1, step 2, step 3)
-- Add student profile progress tracking
-- Add parent/teacher dashboard view
